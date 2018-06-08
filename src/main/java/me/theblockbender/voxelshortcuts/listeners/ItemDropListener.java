@@ -1,11 +1,7 @@
 package me.theblockbender.voxelshortcuts.listeners;
 
 import me.theblockbender.voxelshortcuts.Main;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -14,7 +10,7 @@ public class ItemDropListener implements Listener {
 
     private Main main;
 
-    public ItemDropListener(Main main){
+    public ItemDropListener(Main main) {
         this.main = main;
     }
 

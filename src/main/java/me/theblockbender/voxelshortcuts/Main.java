@@ -14,14 +14,14 @@ public class Main extends JavaPlugin {
 
     public Map<UUID, Integer> doNotBother = new HashMap<>();
 
-    public void onEnable(){
+    public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new ItemDropListener(this), this);
         pm.registerEvents(new ItemSwitchListener(this), this);
         pm.registerEvents(new PlayerLeaveListener(this), this);
     }
 
-    public void onDisable(){
+    public void onDisable() {
         doNotBother.clear();
     }
 }
