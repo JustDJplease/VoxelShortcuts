@@ -65,7 +65,7 @@ public class ItemSwitchListener implements Listener {
     }
 
     private void send(Player player) {
-        TextComponent message = new TextComponent("§8[§b§lWorld§3§lEdit§8]§7 Pressing '§f§lQ§7' will undo your last action.");
+        TextComponent message = new TextComponent("§8[§e§lBee§6§lEdit§8]§7 Pressing '§f§lQ§7' will undo your last action.");
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, message);
     }
 }
