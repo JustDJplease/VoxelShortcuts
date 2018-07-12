@@ -32,7 +32,7 @@ public class ItemSwitchListener implements Listener {
         if (held == null || held.getType() == Material.AIR)
             return;
         Material type = held.getType();
-        if (type != Material.SULPHUR && type != Material.ARROW)
+        if (type != Material.SULPHUR && type != Material.ARROW && type != Material.FLINT)
             return;
         trySendNotification(player);
     }
@@ -44,7 +44,7 @@ public class ItemSwitchListener implements Listener {
         if (held == null || held.getType() == Material.AIR)
             return;
         Material type = held.getType();
-        if (type != Material.SULPHUR && type != Material.ARROW)
+        if (type != Material.SULPHUR && type != Material.ARROW && type != Material.FLINT)
             return;
         trySendNotification(player);
     }
