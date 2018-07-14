@@ -1,9 +1,10 @@
 package me.theblockbender.voxelshortcuts.listeners;
 
 import me.theblockbender.voxelshortcuts.Main;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.minecraft.server.v1_8_R3.IChatBaseComponent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,7 +33,7 @@ public class ItemSwitchListener implements Listener {
         if (held == null || held.getType() == Material.AIR)
             return;
         Material type = held.getType();
-        if (type != Material.SULPHUR && type != Material.ARROW && type != Material.FLINT)
+        if (!main.tools.contains(type))
             return;
         trySendNotification(player);
     }
@@ -40,11 +41,11 @@ public class ItemSwitchListener implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
-        ItemStack held = player.getInventory().getItemInMainHand();
+        ItemStack held = player.getInventory().getItemInHand();
         if (held == null || held.getType() == Material.AIR)
             return;
         Material type = held.getType();
-        if (type != Material.SULPHUR && type != Material.ARROW && type != Material.FLINT)
+        if (!main.tools.contains(type))
             return;
         trySendNotification(player);
     }
@@ -64,8 +65,14 @@ public class ItemSwitchListener implements Listener {
         }
     }
 
+    /**
+     * @param player The player to receive the action bar.
+     * @deprecated Sends an action bar message to a player.
+     */
     private void send(Player player) {
-        TextComponent message = new TextComponent("§8[§e§lBee§6§lEdit§8]§7 Pressing '§f§lQ§7' will undo your last action.");
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, message);
+        String msg = "§8[§e§lBee§6§lEdit§8]§7 Pressing '§f§lQ§7' will undo your last action.";
+        IChatBaseComponent message = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
+        PacketPlayOutChat packet = new PacketPlayOutChat(message, (byte) 2);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
     }
 }

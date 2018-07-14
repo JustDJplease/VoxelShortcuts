@@ -20,7 +20,7 @@ public class ItemDropListener implements Listener {
             return;
 
         Material type = event.getItemDrop().getItemStack().getType();
-        if (type != Material.SULPHUR && type != Material.ARROW && type != Material.FLINT)
+        if (!main.tools.contains(type))
             return;
         event.getPlayer().chat("/u");
         event.setCancelled(true);
